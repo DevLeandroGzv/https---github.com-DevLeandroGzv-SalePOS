@@ -66,3 +66,5 @@ class Container(tk.Frame):
         
         self.btn_informacion = Button(frame2, fg="black",text="Informacion",font="sans 16 bold", command=self.informacion)
         self.btn_informacion.place(x=921,y=0,width=184,height=40)
+        
+        self.buttons = [self.btn_ventas,self.btn_inventario,self.btn_clientes,self.btn_proveedor,self.btn_pedidos,self.btn_informacion]

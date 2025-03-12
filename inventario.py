@@ -6,4 +6,5 @@ class Inventario(tk.Frame):
         super().__init__(padre)
         self.widgets()
     def widgets(self):
-        pass
+        label = Label(self, text="Inventario")
+        label.pack()

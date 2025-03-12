@@ -6,4 +6,5 @@ class Informacion(tk.Frame):
         super().__init__(padre)
         self.widgets()
     def widgets(self):
-        pass
+        label = Label(self, text="Informacion")
+        label.pack()

@@ -10,7 +10,7 @@ import os
 class Manager(Tk):
     def __init__(self,*args, **kwargs):
         super().__init__(*args,**kwargs)
-        self.title("Mini market V1.0")
+        self.title("Sale POS V1.0")
         self.geometry("1100x650+120+20")
         self.resizable(False,False)
         
@@ -22,7 +22,7 @@ class Manager(Tk):
         for i in (Login,Registro,Container):
             frame = i(container,self)
             self.frames[i] = frame
-        self.show_frame(Container)
+        self.show_frame(Login)
         self.style = ttk.Style()
         self.style.theme_use("clam")
         
