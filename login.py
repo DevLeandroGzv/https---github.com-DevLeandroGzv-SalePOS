@@ -59,7 +59,15 @@ class Login(tk.Frame):
         frame1 = tk.Frame(self,bg="#FFFFFF",highlightbackground="black", highlightthickness=1)
         frame1.place(x=350,y=70,width=400,height=560)
         
-        user = ttk.Label(frame1,text="nombre de usuario", font="arial 16 bold", background="#FFFFFF")
+        self.logo_image = Image.open("imagenes/logo2.webp")
+        self.logo_image = self.logo_image.resize((200,150))
+        self.logo_image = ImageTk.PhotoImage(self.logo_image)
+        self.logo_label = ttk.Label(frame1 ,image=self.logo_image)
+        self.logo_label.place(x=100,y=40)
+        
+        
+        
+        user = ttk.Label(frame1,text="Nombre de usuario", font="arial 16 bold", background="#FFFFFF")
         user.place(x=100,y=250)
         
         self.username = ttk.Entry(frame1,font="arial 16 bold")
@@ -135,6 +143,12 @@ class Registro(tk.Frame):
         
         frame1 = tk.Frame(self,bg="#FFFFFF",highlightbackground="black", highlightthickness=1)
         frame1.place(x=350,y=10,width=400,height=630)
+        
+        self.logo_image = Image.open("imagenes/logo2.webp")
+        self.logo_image = self.logo_image.resize((200,150))
+        self.logo_image = ImageTk.PhotoImage(self.logo_image)
+        self.logo_label = ttk.Label(frame1 ,image=self.logo_image)
+        self.logo_label.place(x=100,y=40)
         
         user = ttk.Label(frame1,text="nombre de usuario", font="arial 16 bold", background="#FFFFFF")
         user.place(x=100,y=250)

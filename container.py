@@ -22,7 +22,7 @@ class Container(tk.Frame):
         self.buttons = []
         for i in (Ventas,Inventario,Clientes,Pedido,Proveedor,Informacion):
             frame = i(self)
-            self.frames[i]  =frame
+            self.frames[i]  = frame
             frame.pack()
             frame.config(bg="#C6D9E3",highlightbackground ="gray",highlightthickness= 1)
             frame.place(x=0,y=40,width=1100,height=610)
