@@ -166,3 +166,41 @@ class Inventario(tk.Frame):
                 messagebox.showerror("Error","Error al agregar el articulo")
         tk.Button(top,text="Guardar",font="arial 12 bold",command=guardar).place(x=50,y=260,width=150,height=40)
         tk.Button(top,text="Cancelar",font="arial 12 bold",command=top.destroy).place(x=260,y=260,width=150,height=40)
+        
+    def cargar_articulos(self,filtro,categoria=None):
+        self.after(0,self._cargar_articulos,filtro,categoria)
+    
+    def _cargar_articulos(self,filtro =None,categoria = None):
+        for widget in self.scrollable_frame.winfo_children():
+            widget.destroy()
+        
+        query = "SELECT articulo,precio,imagen_path FROM articulos"
+        params= []
+        if filtro:
+            query +="WHEWRE aritculo LIKE ?"
+            params.append(f'%')
+        
+        
+    def mostrar_articulo(self,articulo,precio,image_path):
+        article_frame= tk.Frame(self.scrollable_frame,bg="white",relief="solid")
+        article_frame.grid(row=self.row,column=self.column,padx=10,pady=10)
+        
+        if image_path and os.path.exists(image_path):
+            image = Image.open(image_path)
+            image = image.resize((150,150),Image.LANCAZOS)
+            imagen = ImageTk.PhotoImage(image)
+            image_label = tk.Label(article_frame,image=image)
+            image_label.image = imagen
+            image_label.pack(expand=True,fill="both")
+            
+            
+        name_label = tk.Label(article_frame,text=articulo,bg="white",anchor="w",wraplength=150,font="arial 10 bold")
+        name_label.pack(side="top",fill="x")
+        
+        precio_label = tk.Label(article_frame,text=f"Precio: ${precio:.2f}",bg="white",anchor="w",wraplength=150,font="arial 8 bold")
+        precio_label.pack(side="bottom",fill="x")
+        
+        self.column += 1
+        if self.column > 3:
+            self.column = 0
+            self.row += 1
