@@ -113,9 +113,6 @@ class Registro(tk.Frame):
         if self.validacionDeDatos(user,password):
             if len(password)<6:
                 messagebox.showinfo(title="Error",message="Contraseña demasiado corta")
-                self.username.delete(0,'end') 
-                self.password.delete(0,'end') 
-                self.key.delete(0,'end')
             else:
                 if key =="1234":
                     consulta = "INSERT INTO usuarios VALUES (?,?,?)"
