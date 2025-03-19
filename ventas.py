@@ -1,6 +1,6 @@
 from tkinter import *
 import tkinter as tk
-from tkinter import ttk, messagebox
+from tkinter import ttk, messagebox,simpledialog
 import sqlite3
 import datetime
 import threading
@@ -127,6 +127,7 @@ class Ventas(tk.Frame):
     def realizar_pago(self):
         if not self.tre.get_children():
             messagebox.showerror("Error","No hay productos seleccionados para realizar el pago") 
+            return
         total_venta = sum(float(item[5].replace(" ","").replace(",","")) for item in self.productos_seleccionados)        
         total_formateado = "{:,.0f}".format(total_venta) 
         
@@ -202,8 +203,67 @@ class Ventas(tk.Frame):
         self.entry_producto.set('')
         self.entry_cantidad.delete(0,"end")
         
+    def limpiar_lista(self):
+        self.tre.delete(*self.tre.get_children())
+        self.productos_seleccionados.clear()
+        self.calcular_precio_total()
         
-         
+        
+    def eliminar_articulo(self):
+        item_seleccionado = self.tre.selection()
+        if not item_seleccionado:
+            messagebox.showerror("Error","No hay nigun articulo seleccionado")
+        
+        item_id= item_seleccionado[0]
+        valores_item = self.tre.item(item_id)['values']
+        factura,cliente,articulo,precio,cantidad,total = valores_item
+        self.tre.delete(item_id)
+        self.productos_seleccionados = [producto for producto in self.productos_seleccionados if producto[2] != articulo]
+        self.calcular_precio_total()
+    
+    def editar_articulo(self):
+        selected_item = self.tre.selection()
+        if not selected_item:
+            messagebox.showerror("Error","No hay nigun articulo seleccionado")
+        
+        item_values = self.tre.item(selected_item[0],'values')
+        if not item_values:
+            return
+        
+        current_producto = item_values[2]
+        current_cantidad = item_values[4]
+        
+        new_cantidad = simpledialog.askinteger('Editar articulo', "ingrese la nueva cantidad :",initialvalue=current_cantidad)
+        if new_cantidad is not None:
+            try:
+                conn =sqlite3.connect(self.db_name)
+                c =conn.cursor()
+                c.execute("SELECT precio,costo,stock FROM articulos WHERE articulo =?",(current_producto,))
+                resultado = c.fetchone()
+                
+                if resultado is None:
+                    messagebox.showerror("Error","producto no encontrado")
+                precio,costo,stock = resultado
+                if new_cantidad > stock:
+                    messagebox.showerror("Error",f"stock insuficiente . Solo hay {stock} unidades disponibles")
+                    return
+                
+                total =precio * new_cantidad
+                total_cop = "{:,.0f}".format(total)
+                self.tre.item(selected_item[0],values=(self.numero_factura,self.entry_cliente.get(),current_producto,"{:,.0f}".format(precio),new_cantidad,total_cop ))
+                
+                for idx,producto in enumerate(self.productos_seleccionados):
+                    if producto[2] == current_producto:
+                        self.productos_seleccionados[idx] =(self.numero_factura,self.entry_cliente.get(),current_producto,precio,new_cantidad,total_cop,costo)
+                        break
+                conn.close()
+                
+                self.calcular_precio_total()
+                   
+            except sqlite3.Error as e :
+                print("Error al editar el articulo :",e)
+                    
+                 
     def widgets(self):
         labelframe = tk.LabelFrame(self,font="sans 12 bold",background="#C6D9E3")
         labelframe.place(x=25,y=30,width=1045,height=180)
@@ -241,13 +301,13 @@ class Ventas(tk.Frame):
         boton_agregar = tk.Button(labelframe,text="Agregar Articulo",font="sans 14 bold",command=self.agregar_articulo)
         boton_agregar.place(x=90,y=120,width=200,height=40)
         
-        boton_eliminar = tk.Button(labelframe,text="Eliminar Articulo",font="sans 14 bold")
+        boton_eliminar = tk.Button(labelframe,text="Eliminar Articulo",font="sans 14 bold",command=self.eliminar_articulo)
         boton_eliminar.place(x=310,y=120,width=200,height=40)
         
-        boton_editar = tk.Button(labelframe,text="Editar Articulo",font="sans 14 bold")
+        boton_editar = tk.Button(labelframe,text="Editar Articulo",font="sans 14 bold",command=self.editar_articulo)
         boton_editar.place(x=530,y=120,width=200,height=40)
         
-        boton_limpiar = tk.Button(labelframe,text="Limpiar lista",font="sans 14 bold")
+        boton_limpiar = tk.Button(labelframe,text="Limpiar lista",font="sans 14 bold",command=self.limpiar_lista)
         boton_limpiar.place(x=750,y=120,width=200,height=40)
 
         treframe = tk.Frame(self,bg="white")
