@@ -95,7 +95,7 @@ class Ventas(tk.Frame):
                     
                     self.tre.insert("","end",values=(self.numero_factura,cliente,producto,"{:,.0f}".format(precio),cantidad,total_cop)) 
 
-                    self.productos_seleccionados.append((self.numero_factura),cliente,producto,precio,cantidad,total_cop,costo)
+                    self.productos_seleccionados.append((self.numero_factura,cliente,producto,precio,cantidad,total_cop,costo))
                     
                     conn.close()
                     
@@ -108,7 +108,7 @@ class Ventas(tk.Frame):
                     
                 self.calcular_precio_total()
     def calcular_precio_total(self):
-        total_pagar = sum(float(self.tre.item(item)['values'][-1].replace("","").replace(",","")) for item in self.tre.get_children())
+        total_pagar = sum(float(str(self.tre.item(item)['values'][-1]).replace("","").replace(",","")) for item in self.tre.get_children())
         total_pagar_cop = "{:,.0f}".format(total_pagar)
         self.label_precio_total.config(text=f"Precio a pagar : $ {total_pagar_cop}")   
     
@@ -152,7 +152,7 @@ class Ventas(tk.Frame):
         entry_monto = ttk.Entry(ventana_pago,font="sans 14 bold")
         entry_monto.place(x=80,y=210,width=240,height=40)
         
-        btn_confirmar = tk.Button(ventana_pago,text="Confirmar pago",font="sans 14 bold",command=self.procesar_pago(entry_monto.get(),ventana_pago,total_venta))
+        btn_confirmar = tk.Button(ventana_pago,text="Confirmar pago",font="sans 14 bold",command=lambda:self.procesar_pago(entry_monto.get(),ventana_pago,total_venta))
         btn_confirmar.place(x=80,y=270,width=240,height=40)    
         
         
@@ -178,10 +178,10 @@ class Ventas(tk.Frame):
              
              for item in self.productos_seleccionados:
                  factura,cliente,producto,precio,cantidad,total,costo = item
-                 c.execute("INSERT INTO ventas (factura,cliente,articulo,precio,cantidad,total,costo, fecha,hora), VALUES (?,?,?,?,?,?,?,?,?) ",
-                           (factura,cliente,producto,precio,total.replace(" ","").replace(",",""),costo*cantidad, fecha_actual,hora_actual)
+                 c.execute("INSERT INTO ventas (factura,cliente,articulo,precio,cantidad,total,costo, fecha,hora) VALUES (?,?,?,?,?,?,?,?,?) ",
+                           (factura,cliente,producto,precio,cantidad,total.replace(" ","").replace(",",""),costo*cantidad, fecha_actual,hora_actual)
                            )
-                 c.execute("UPDATE articulos SET stock =stock -? WHERE articulo",(cantidad,producto))
+                 c.execute("UPDATE articulos SET stock = stock -? WHERE articulo = ?",(cantidad,producto))
              conn.commit()
          except sqlite3.Error as e:
              messagebox.showerror("Error",f"No se puede guardar la venta :{e}")
@@ -190,7 +190,7 @@ class Ventas(tk.Frame):
          self.label_numero_factura.config(text=str(self.numero_factura))
          
          self.productos_seleccionados =[]
-         self.limpiar_campos()
+         self.limpiar_Campos()
          
          ventana_pago.destroy()
          
@@ -199,7 +199,7 @@ class Ventas(tk.Frame):
             self.tre.delete(item)
         self.label_precio_total.config(text="Precio  a pagar :$ 0")
         
-        self.entry_cantidad.set('')
+        self.entry_producto.set('')
         self.entry_cantidad.delete(0,"end")
         
         
@@ -238,7 +238,7 @@ class Ventas(tk.Frame):
         self.label_numero_factura = tk.Label(labelframe,text=f"{self.numero_factura}", font="sans 14 bold", bg="#C6D9E3")
         self.label_numero_factura.place(x=950, y=11)
         
-        boton_agregar = tk.Button(labelframe,text="Agregar Articulo",font="sans 14 bold")
+        boton_agregar = tk.Button(labelframe,text="Agregar Articulo",font="sans 14 bold",command=self.agregar_articulo)
         boton_agregar.place(x=90,y=120,width=200,height=40)
         
         boton_eliminar = tk.Button(labelframe,text="Eliminar Articulo",font="sans 14 bold")
@@ -282,7 +282,7 @@ class Ventas(tk.Frame):
         self.label_precio_total = tk.Label(self,text="Precio a pagar : $ 0",bg="#C6D9E3",font="sans 18 bold")
         self.label_precio_total.place(x=680,y=550)
         
-        boton_pagar = tk.Button(self,text="Pagar",font="sans 14 bold") 
+        boton_pagar = tk.Button(self,text="Pagar",font="sans 14 bold",command=self.realizar_pago) 
         boton_pagar.place(x=70,y=550,width=180,height=40)
         
         boton_ver_ventas = tk.Button(self,text="Ver ventas realizadas",font="sans 14 bold") 
