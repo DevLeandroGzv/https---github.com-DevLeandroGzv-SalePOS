@@ -19,8 +19,10 @@ class Ventas(tk.Frame):
         self.numero_factura = self.obtener_numero_factura_Actual()
         self.productos_seleccionados = []
         self.timer_producto = None
+        self.timer_cliente = None
         self.widgets()
         self.cargar_productos()
+        self.cargar_Clientes()
         
     def obtener_numero_factura_Actual(self):
               try:
@@ -44,7 +46,17 @@ class Ventas(tk.Frame):
               except sqlite3.Error as e:
                   print("Error obteniendo los productos : ",e) 
                   
-                  
+    def cargar_Clientes(self):
+              try:
+                  conn = sqlite3.connect(self.db_name)
+                  cursor = conn.cursor()
+                  cursor.execute("SELECT Nombre FROM clientes")
+                  self.cliente = [cliente[0] for cliente in cursor.fetchall()]
+                  self.entry_cliente['values'] = self.cliente
+                  conn.close()
+              except sqlite3.Error as e:
+                  print("Error obteniendo los productos : ",e)  
+                             
     def filtrar_productos(self,Event=None):
         if self.timer_producto:
             self.timer_producto.cancel()
@@ -66,6 +78,28 @@ class Ventas(tk.Frame):
             self.entry_producto['values'] = ['No results on']
             self.entry_producto.event_generate('<Down>')
             self.entry_producto.delete(0,tk.END)
+    
+    def filtrar_clientes(self,Event=None):
+        if self.timer_cliente:
+            self.timer_cliente.cancel()
+        self.timer_cliente =threading.Timer(1,self._filter_client)
+        self.timer_cliente.start()
+        
+    def _filter_client(self):
+        typed = self.entry_cliente.get()
+        
+        if typed == '':
+            data = self.cliente
+        else:
+            data = [item for item in self.cliente if typed.lower() in item.lower()]
+            
+        if data :
+            self.entry_cliente['values'] = data
+            self.entry_cliente.event_generate('<Down>')
+        else:
+            self.entry_cliente['values'] = ['No results on']
+            self.entry_cliente.event_generate('<Down>')
+            self.entry_cliente.delete(0,tk.END)
         
           
     def agregar_articulo(self):
@@ -465,6 +499,9 @@ class Ventas(tk.Frame):
         
         self.entry_cliente = ttk.Combobox(labelframe,font="sans 14 bold")
         self.entry_cliente.place(x=120,y=8,width=260,height=40)
+        self.entry_cliente.bind("<KeyRelease>",self.filtrar_clientes)
+        
+    
         
         label_producto = tk.Label(labelframe,text="Producto : ",font="sans 14 bold", bg="#C6D9E3")
         label_producto.place(x=10,y=70)
