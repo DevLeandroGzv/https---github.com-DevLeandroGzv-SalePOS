@@ -72,10 +72,22 @@ class Inventario(tk.Frame):
         lblframe_botones = tk.LabelFrame(self,bg="#C6D9E3",text="Opciones",font="arial 14 bold")
         lblframe_botones.place(x=10,y=290, width=280,height=300)
         
+        image_pil = Image.open("img/agg.png")
+        imagen_resize = image_pil.resize((30,30))
+        image_tk = ImageTk.PhotoImage(imagen_resize)
+        
         btn1 = tk.Button(lblframe_botones,text="Agregar",font="arial 14 bold",command=self.agregar_articulo)
+        btn1.config(image=image_tk,compound=LEFT,padx=20)
+        btn1.image = image_tk
         btn1.place(x=20,y=20,width=200,height=40)
         
+        image_pil = Image.open("img/editar.png")
+        imagen_resize = image_pil.resize((30,30))
+        image_tk = ImageTk.PhotoImage(imagen_resize)
+        
         btn2 = tk.Button(lblframe_botones,text="Editar",font="arial 14 bold",command=self.editar_articulo)
+        btn2.config(image=image_tk,compound=LEFT,padx=20)
+        btn2.image = image_tk
         btn2.place(x=20,y=80,width=200,height=40)
         
     def load_image(self):

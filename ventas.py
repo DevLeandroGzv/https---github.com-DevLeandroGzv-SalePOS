@@ -8,6 +8,7 @@ from reportlab.lib.pagesizes import letter
 from reportlab.lib import colors
 from reportlab.lib.units import inch
 from reportlab.pdfgen import canvas
+from PIL import Image,ImageTk
 import sys
 import os
 
@@ -109,8 +110,10 @@ class Ventas(tk.Frame):
                 
                 if not cliente:
                     messagebox.showerror("Error"," seleccione un cliente")
+                    return
                 if not producto:
                     messagebox.showerror("Error"," seleccione un producto")
+                    return
                 if not cantidad.isdigit() or int(cantidad)<=0:
                     messagebox.showerror("Error"," ingrese una cantidad valida")
                     return
@@ -527,16 +530,41 @@ class Ventas(tk.Frame):
         self.label_numero_factura = tk.Label(labelframe,text=f"{self.numero_factura}", font="sans 14 bold", bg="#C6D9E3")
         self.label_numero_factura.place(x=950, y=11)
         
-        boton_agregar = tk.Button(labelframe,text="Agregar Articulo",font="sans 14 bold",command=self.agregar_articulo)
+        
+        image_pil = Image.open("img/agg_articulo.png")
+        imagen_resize = image_pil.resize((30,30))
+        image_tk = ImageTk.PhotoImage(imagen_resize)
+        
+        boton_agregar = tk.Button(labelframe,text="Agregar Articulo",font="sans 12 bold",command=self.agregar_articulo)
+        boton_agregar.config(image=image_tk,compound=LEFT,padx=20)
+        boton_agregar.image = image_tk
         boton_agregar.place(x=90,y=120,width=200,height=40)
         
-        boton_eliminar = tk.Button(labelframe,text="Eliminar Articulo",font="sans 14 bold",command=self.eliminar_articulo)
+        image_pil = Image.open("img/del_art.png")
+        imagen_resize = image_pil.resize((30,30))
+        image_tk = ImageTk.PhotoImage(imagen_resize)
+        
+        boton_eliminar = tk.Button(labelframe,text="Eliminar Articulo",font="sans 12 bold",command=self.eliminar_articulo)
+        boton_eliminar.config(image=image_tk,compound=LEFT,padx=20)
+        boton_eliminar.image = image_tk
         boton_eliminar.place(x=310,y=120,width=200,height=40)
         
-        boton_editar = tk.Button(labelframe,text="Editar Articulo",font="sans 14 bold",command=self.editar_articulo)
+        image_pil = Image.open("img/edit.png")
+        imagen_resize = image_pil.resize((30,30))
+        image_tk = ImageTk.PhotoImage(imagen_resize)
+
+        boton_editar = tk.Button(labelframe,text="Editar Articulo",font="sans 12 bold",command=self.editar_articulo)
+        boton_editar.config(image=image_tk,compound=LEFT,padx=20)
+        boton_editar.image = image_tk
         boton_editar.place(x=530,y=120,width=200,height=40)
         
-        boton_limpiar = tk.Button(labelframe,text="Limpiar lista",font="sans 14 bold",command=self.limpiar_lista)
+        image_pil = Image.open("img/escoba.png")
+        imagen_resize = image_pil.resize((30,30))
+        image_tk = ImageTk.PhotoImage(imagen_resize)
+        
+        boton_limpiar = tk.Button(labelframe,text="Limpiar lista",font="sans 12 bold",command=self.limpiar_lista)
+        boton_limpiar.config(image=image_tk,compound=LEFT,padx=20)
+        boton_limpiar.image = image_tk
         boton_limpiar.place(x=750,y=120,width=200,height=40)
 
         treframe = tk.Frame(self,bg="white")
@@ -571,8 +599,20 @@ class Ventas(tk.Frame):
         self.label_precio_total = tk.Label(self,text="Precio a pagar : $ 0",bg="#C6D9E3",font="sans 18 bold")
         self.label_precio_total.place(x=680,y=550)
         
+        image_pil = Image.open("img/pago.png")
+        imagen_resize = image_pil.resize((30,30))
+        image_tk = ImageTk.PhotoImage(imagen_resize)
+        
         boton_pagar = tk.Button(self,text="Pagar",font="sans 14 bold",command=self.realizar_pago) 
+        boton_pagar.config(image=image_tk,compound=LEFT,padx=20)
+        boton_pagar.image = image_tk
         boton_pagar.place(x=70,y=550,width=180,height=40)
         
+        image_pil = Image.open("img/compras.png")
+        imagen_resize = image_pil.resize((30,30))
+        image_tk = ImageTk.PhotoImage(imagen_resize)
+        
         boton_ver_ventas = tk.Button(self,text="Ver ventas realizadas",font="sans 14 bold",command=self.ver_ventas_realizadas) 
+        boton_ver_ventas.config(image=image_tk,compound=LEFT,padx=20)
+        boton_ver_ventas.image = image_tk
         boton_ver_ventas.place(x=290,y=550,width=280,height=40)

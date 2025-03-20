@@ -6,6 +6,7 @@ from clientes import Clientes
 from pedido import Pedido
 from proveedor import Proveedor
 from informacion import Informacion
+from PIL import Image,ImageTk
 
 import sys
 import os
@@ -49,13 +50,32 @@ class Container(tk.Frame):
         frame2 = tk.Frame(self)
         frame2.place(x=0,y=0,width=1100,height=40)
         
+        
+        image_pil = Image.open("img/ventas.png")
+        imagen_resize = image_pil.resize((35,30))
+        image_tk = ImageTk.PhotoImage(imagen_resize)
+        
         self.btn_ventas = Button(frame2, fg="black",text="Ventas",font="sans 16 bold", command=self.ventas)
+        self.btn_ventas.config(image=image_tk,compound=LEFT,padx=20)
+        self.btn_ventas.image = image_tk
         self.btn_ventas.place(x=0,y=0,width=184,height=40)
         
+        image_pil = Image.open("img/lista.png")
+        imagen_resize = image_pil.resize((30,30))
+        image_tk = ImageTk.PhotoImage(imagen_resize)
+        
         self.btn_inventario = Button(frame2, fg="black",text="Inventario",font="sans 16 bold", command=self.inventario)
+        self.btn_inventario.config(image=image_tk,compound=LEFT,padx=20)
+        self.btn_inventario.image = image_tk
         self.btn_inventario.place(x=184,y=0,width=184,height=40)
         
+        image_pil = Image.open("img/usuario.png")
+        imagen_resize = image_pil.resize((30,30))
+        image_tk = ImageTk.PhotoImage(imagen_resize)
+        
         self.btn_clientes = Button(frame2, fg="black",text="Clientes",font="sans 16 bold", command=self.clientes)
+        self.btn_clientes.config(image=image_tk,compound=LEFT,padx=20)
+        self.btn_clientes.image = image_tk
         self.btn_clientes.place(x=369,y=0,width=184,height=40)
         
         #self.btn_pedidos = Button(frame2, fg="black",text="Pedidos",font="sans 16 bold", command=self.pedidos)
@@ -64,7 +84,13 @@ class Container(tk.Frame):
         #self.btn_proveedor = Button(frame2, fg="black",text="Proveedor",font="sans 16 bold", command=self.proveedor)
         #self.btn_proveedor.place(x=737,y=0,width=184,height=40)
         
+        image_pil = Image.open("img/informacion.png")
+        imagen_resize = image_pil.resize((30,30))
+        image_tk = ImageTk.PhotoImage(imagen_resize)
+        
         self.btn_informacion = Button(frame2, fg="black",text="Informacion",font="sans 16 bold", command=self.informacion)
+        self.btn_informacion.config(image=image_tk,compound=LEFT,padx=20)
+        self.btn_informacion.image = image_tk
         self.btn_informacion.place(x=553,y=0,width=184,height=40)
         
         self.buttons = [self.btn_ventas,self.btn_inventario,self.btn_clientes,self.btn_informacion]

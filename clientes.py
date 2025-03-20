@@ -2,6 +2,7 @@ from tkinter import *
 import tkinter as tk
 from tkinter import ttk, messagebox
 import sqlite3
+from PIL import Image,ImageTk
 
 class Clientes(tk.Frame):
     db_name = ("database.db")
@@ -38,10 +39,22 @@ class Clientes(tk.Frame):
         self.email = ttk.Entry(self.labelframe,font="sans 12 bold")
         self.email.place(x=10,y=370,width=220,height=40)
         
+        image_pil = Image.open("img/agg.png")
+        imagen_resize = image_pil.resize((30,30))
+        image_tk = ImageTk.PhotoImage(imagen_resize)
+        
         btnguardar = Button(self.labelframe, fg="Black",text="Ingresar",font="sans 16 bold",command=self.registrar)
+        btnguardar.config(image=image_tk,compound=LEFT,padx=20)
+        btnguardar.image = image_tk
         btnguardar.place(x=10,y=420,width=220,height=40)
         
+        image_pil = Image.open("img/editar.png")
+        imagen_resize = image_pil.resize((30,30))
+        image_tk = ImageTk.PhotoImage(imagen_resize)
+        
         btnmodificar = Button(self.labelframe, fg="Black",text="Modificar",font="sans 16 bold",command=self.modificar)
+        btnmodificar.config(image=image_tk,compound=LEFT,padx=20)
+        btnmodificar.image = image_tk
         btnmodificar.place(x=10,y=470,width=220,height=40)
         
         treFrame= Frame(self, bg="white")
