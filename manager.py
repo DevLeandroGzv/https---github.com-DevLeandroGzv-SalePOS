@@ -17,19 +17,26 @@ class Manager(Tk):
         container = Frame(self)
         container.pack(side =TOP,fill=BOTH, expand=True)
         container.configure(bg="#C6D9E3")
+        ruta = self.rutas(r"icono.ico")
+        self.iconbitmap(ruta)
         
         self.frames = {}
         for i in (Login,Registro,Container):
             frame = i(container,self)
             self.frames[i] = frame
-        self.show_frame(Login)
+        self.show_frame(Container)
         self.style = ttk.Style()
         self.style.theme_use("clam")
         
     def show_frame(self,container):
         frame = self.frames[container]
         frame.tkraise()
-        
+    def rutas(sel,ruta):
+        try:
+            rutabase=sys.__MEIPASS
+        except Exception:
+            rutabase= os.path.abspath(".")
+        return os.path.join(rutabase,ruta)  
 def main():
     app = Manager()
     app.mainloop()
