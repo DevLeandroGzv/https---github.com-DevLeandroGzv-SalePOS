@@ -494,40 +494,56 @@ class Ventas(tk.Frame):
             messagebox.showerror("Error",f"No se pudo generar la factura : {e}")
         
     def widgets(self):
-        labelframe = tk.LabelFrame(self,font="sans 12 bold",background="#C6D9E3")
+        labelframe = tk.LabelFrame(self,font="sans 12 bold",background="#4f95c9")
         labelframe.place(x=25,y=30,width=1045,height=180)
         
-        label_cliente = tk.Label(labelframe,text="Cliente : ",font="sans 14 bold", bg="#C6D9E3")
+        label_cliente = tk.Label(labelframe,text="Cliente : ",font="Segoe 14 bold", bg="#4f95c9")
         label_cliente.place(x=10,y=11)
         
         self.entry_cliente = ttk.Combobox(labelframe,font="sans 14 bold")
         self.entry_cliente.place(x=120,y=8,width=260,height=40)
         self.entry_cliente.bind("<KeyRelease>",self.filtrar_clientes)
         
-    
+        image_pil = Image.open("img/actualizar.png")
+        imagen_resize = image_pil.resize((30,30))
+        image_tk = ImageTk.PhotoImage(imagen_resize)
         
-        label_producto = tk.Label(labelframe,text="Producto : ",font="sans 14 bold", bg="#C6D9E3")
+        btnrec = tk.Button(labelframe,font="sans 14 bold",command=self.cargar_Clientes)
+        btnrec.config(image=image_tk,compound=LEFT,padx=20)
+        btnrec.image = image_tk
+        btnrec.place(x=390,y=8,width=40,height=40)
+        
+        label_producto = tk.Label(labelframe,text="Producto : ",font="sans 14 bold", bg="#4f95c9")
         label_producto.place(x=10,y=70)
         
         self.entry_producto= ttk.Combobox(labelframe,font="sans 14 bold")
         self.entry_producto.place(x=120,y=66,width=260,height=40)
         self.entry_producto.bind("<KeyRelease>",self.filtrar_productos)
         
-        label_cantidad = tk.Label(labelframe,text="Cantidad : ",font="sans 14 bold", bg="#C6D9E3")
+        image_pil = Image.open("img/actualizar.png")
+        imagen_resize = image_pil.resize((30,30))
+        image_tk = ImageTk.PhotoImage(imagen_resize)
+        
+        btnrec = tk.Button(labelframe,font="sans 14 bold",command=self.cargar_productos)
+        btnrec.config(image=image_tk,compound=LEFT,padx=20)
+        btnrec.image = image_tk
+        btnrec.place(x=390,y=66,width=40,height=40)
+        
+        label_cantidad = tk.Label(labelframe,text="Cantidad : ",font="sans 14 bold", bg="#4f95c9")
         label_cantidad.place(x=500,y=11)
         
         self.entry_cantidad = ttk.Entry(labelframe,font="sans 14 bold")
         self.entry_cantidad.place(x=610,y=8,width=100,height=40)
         
-        self.label_stock = tk.Label(labelframe,text="Stock : ",font="sans 14 bold", bg="#C6D9E3")
+        self.label_stock = tk.Label(labelframe,text="Stock : ",font="sans 14 bold", bg="#4f95c9")
         self.label_stock.place(x=500,y=70)
         self.entry_producto.bind('<<ComboboxSelected>>',self.actualizar_stock)
         
         
-        label_factura = tk.Label(labelframe,text="Numero de Factura",font="sans 14 bold", bg="#C6D9E3")
+        label_factura = tk.Label(labelframe,text="Numero de Factura : ",font="sans 14 bold", bg="#4f95c9")
         label_factura.place(x=750,y=11)
         
-        self.label_numero_factura = tk.Label(labelframe,text=f"{self.numero_factura}", font="sans 14 bold", bg="#C6D9E3")
+        self.label_numero_factura = tk.Label(labelframe,text=f"{self.numero_factura}", font="sans 14 bold", bg="#4f95c9")
         self.label_numero_factura.place(x=950, y=11)
         
         
@@ -596,7 +612,7 @@ class Ventas(tk.Frame):
         self.tre.column("Cantidad",width=120,anchor="center")
         self.tre.column("Total",width=150,anchor="center")
         
-        self.label_precio_total = tk.Label(self,text="Precio a pagar : $ 0",bg="#C6D9E3",font="sans 18 bold")
+        self.label_precio_total = tk.Label(self,text="Precio a pagar : $ 0",bg="#4f95c9",font="sans 18 bold")
         self.label_precio_total.place(x=680,y=550)
         
         image_pil = Image.open("img/pago.png")

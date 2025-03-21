@@ -23,12 +23,12 @@ class Inventario(tk.Frame):
     def widgets(self):
         
         #====================================================================================
-        canvas_articulo = tk.LabelFrame(self,text="Articulos",font="arial 14 bold",bg="#C6D9E3")
+        canvas_articulo = tk.LabelFrame(self,text="Articulos",font="arial 14 bold",bg="#4f95c9")
         canvas_articulo.place(x=300,y=10,width=780,height=580)
         
-        self.canvas = tk.Canvas(canvas_articulo,bg="#C6D9E3")
+        self.canvas = tk.Canvas(canvas_articulo,bg="#4f95c9")
         self.scrollbar = tk.Scrollbar(self.canvas,orient="vertical",command=self.canvas.yview)
-        self.scrollable_frame = tk.Frame(self.canvas,bg="#C6D9E3")
+        self.scrollable_frame = tk.Frame(self.canvas,bg="#4f95c9")
 
         self.scrollable_frame.bind(
             "<Configure>",
@@ -43,7 +43,7 @@ class Inventario(tk.Frame):
         self.scrollbar.pack(side="right",fill="y")
         self.canvas.pack(side="left",fill="both",expand=True)
     #====================================================================================
-        lblframe_buscar = LabelFrame(self,text="Buscar",font="arial 14 bold",bg="#C6D9E3")
+        lblframe_buscar = LabelFrame(self,text="Buscar",font="arial 14 bold",bg="#4f95c9")
         lblframe_buscar.place(x=10,y=10,width=280,height=80)
         
         self.comboboxbuscar = ttk.Combobox(lblframe_buscar,font="arial 14")
@@ -51,25 +51,25 @@ class Inventario(tk.Frame):
         self.comboboxbuscar.bind("<<ComboboxSelected>>",self.on_combobox_select)
         self.comboboxbuscar.bind("<KeyRelease>",self.filtrar_articulos)
     #====================================================================================
-        lblframe_seleccion = LabelFrame(self,text="Selección",font="arial 14 bold",bg="#C6D9E3")
+        lblframe_seleccion = LabelFrame(self,text="Selección",font="arial 14 bold",bg="#4f95c9")
         lblframe_seleccion.place(x=10,y=95,width=280,height=190)
         
-        self.label1 = tk.Label(lblframe_seleccion,text="Articulo :", font="arial 12",bg="#C6D9E3",wraplength=300)
+        self.label1 = tk.Label(lblframe_seleccion,text="Articulo :", font="arial 12",bg="#4f95c9",wraplength=300)
         self.label1.place(x=5,y=5)
         
-        self.label2 = tk.Label(lblframe_seleccion,text="Precio :", font="arial 12",bg="#C6D9E3")
+        self.label2 = tk.Label(lblframe_seleccion,text="Precio :", font="arial 12",bg="#4f95c9")
         self.label2.place(x=5,y=40)
         
-        self.label3 = tk.Label(lblframe_seleccion,text="Costo :", font="arial 12",bg="#C6D9E3")
+        self.label3 = tk.Label(lblframe_seleccion,text="Costo :", font="arial 12",bg="#4f95c9")
         self.label3.place(x=5,y=70)
         
-        self.label4 = tk.Label(lblframe_seleccion,text="Stock :", font="arial 12",bg="#C6D9E3")
+        self.label4 = tk.Label(lblframe_seleccion,text="Stock :", font="arial 12",bg="#4f95c9")
         self.label4.place(x=5,y=100)
         
-        self.label5 = tk.Label(lblframe_seleccion,text="Estado :", font="arial 12",bg="#C6D9E3")
+        self.label5 = tk.Label(lblframe_seleccion,text="Estado :", font="arial 12",bg="#4f95c9")
         self.label5.place(x=5,y=130)
     #====================================================================================
-        lblframe_botones = tk.LabelFrame(self,bg="#C6D9E3",text="Opciones",font="arial 14 bold")
+        lblframe_botones = tk.LabelFrame(self,bg="#4f95c9",text="Opciones",font="arial 14 bold")
         lblframe_botones.place(x=10,y=290, width=280,height=300)
         
         image_pil = Image.open("img/agg.png")
@@ -117,7 +117,7 @@ class Inventario(tk.Frame):
         top = tk.Toplevel(self)
         top.title("Agregar articulo")
         top.geometry("700x400+200+50")
-        top.config(bg="#C6D9E3")
+        top.config(bg="#4f95c9")
         top.resizable(False,False)
         
         top.transient(self.master)
@@ -125,23 +125,23 @@ class Inventario(tk.Frame):
         top.focus_set()
         top.lift()
         
-        tk.Label(top,text="Articulo: ", font="arial 12 bold", bg="#C6D9E3").place(x=20,y=20,width=80,height=25)
+        tk.Label(top,text="Articulo: ", font="arial 12 bold", bg="#4f95c9").place(x=20,y=20,width=80,height=25)
         entry_articulo  = ttk.Entry(top,font="arial 12 bold")
         entry_articulo.place(x=120,y=20,width=250,height=30)
         
-        tk.Label(top,text="Precio: ", font="arial 12 bold", bg="#C6D9E3").place(x=20,y=60,width=80,height=25)
+        tk.Label(top,text="Precio: ", font="arial 12 bold", bg="#4f95c9").place(x=20,y=60,width=80,height=25)
         entry_precio  = ttk.Entry(top,font="arial 12 bold")
         entry_precio.place(x=120,y=60,width=250,height=30)
         
-        tk.Label(top,text="Costo: ", font="arial 12 bold", bg="#C6D9E3").place(x=20,y=100,width=80,height=25)
+        tk.Label(top,text="Costo: ", font="arial 12 bold", bg="#4f95c9").place(x=20,y=100,width=80,height=25)
         entry_costo  = ttk.Entry(top,font="arial 12 bold")
         entry_costo.place(x=120,y=100,width=250,height=30)
         
-        tk.Label(top,text="Stock: ", font="arial 12 bold", bg="#C6D9E3").place(x=20,y=140,width=80,height=25)
+        tk.Label(top,text="Stock: ", font="arial 12 bold", bg="#4f95c9").place(x=20,y=140,width=80,height=25)
         entry_stock  = ttk.Entry(top,font="arial 12 bold")
         entry_stock.place(x=120,y=140,width=250,height=30)
         
-        tk.Label(top,text="Estado: ", font="arial 12 bold", bg="#C6D9E3").place(x=20,y=180,width=80,height=25)
+        tk.Label(top,text="Estado: ", font="arial 12 bold", bg="#4f95c9").place(x=20,y=180,width=80,height=25)
         entry_estado  = ttk.Entry(top,font="arial 12 bold")
         entry_estado.place(x=120,y=180,width=250,height=30)
         
@@ -315,28 +315,28 @@ class Inventario(tk.Frame):
         top.lift()
         
         (articulo,precio,costo,stock,estado,image_path) = resultado
-        tk.Label(top,text="Articulo: ",font="arial 12 bold",bg="#C6D9E3").place(x=20,y=20,width=80,height=25)
+        tk.Label(top,text="Articulo: ",font="arial 12 bold",bg="#4f95c9").place(x=20,y=20,width=80,height=25)
         entry_articulo = ttk.Entry(top,font="arial 12 bold")
         entry_articulo.place(x=120,y=20,width=250,height=30)
         entry_articulo.insert(0,articulo)
         
         
-        tk.Label(top,text="Precio: ",font="arial 12 bold",bg="#C6D9E3").place(x=20,y=60,width=80,height=25)
+        tk.Label(top,text="Precio: ",font="arial 12 bold",bg="#4f95c9").place(x=20,y=60,width=80,height=25)
         entry_precio = ttk.Entry(top,font="arial 12 bold")
         entry_precio.place(x=120,y=60,width=250,height=30)
         entry_precio.insert(0,precio) 
         
-        tk.Label(top,text="Costo: ",font="arial 12 bold",bg="#C6D9E3").place(x=20,y=100,width=80,height=25)
+        tk.Label(top,text="Costo: ",font="arial 12 bold",bg="#4f95c9").place(x=20,y=100,width=80,height=25)
         entry_costo = ttk.Entry(top,font="arial 12 bold")
         entry_costo.place(x=120,y=100,width=250,height=30)
         entry_costo.insert(0,costo) 
     
-        tk.Label(top,text="Stock: ",font="arial 12 bold",bg="#C6D9E3").place(x=20,y=140,width=80,height=25)
+        tk.Label(top,text="Stock: ",font="arial 12 bold",bg="#4f95c9").place(x=20,y=140,width=80,height=25)
         entry_stock = ttk.Entry(top,font="arial 12 bold")
         entry_stock.place(x=120,y=140,width=250,height=30)
         entry_stock.insert(0,stock)
         
-        tk.Label(top,text="Estado: ",font="arial 12 bold",bg="#C6D9E3").place(x=20,y=180,width=80,height=25)
+        tk.Label(top,text="Estado: ",font="arial 12 bold",bg="#4f95c9").place(x=20,y=180,width=80,height=25)
         entry_estado = ttk.Entry(top,font="arial 12 bold")
         entry_estado.place(x=120,y=180,width=250,height=30)
         entry_estado.insert(0,estado)  

@@ -25,7 +25,7 @@ class Container(tk.Frame):
             frame = i(self)
             self.frames[i]  = frame
             frame.pack()
-            frame.config(bg="#C6D9E3",highlightbackground ="gray",highlightthickness= 1)
+            frame.config(bg="#4f95c9",highlightbackground ="gray",highlightthickness= 1)
             frame.place(x=0,y=40,width=1100,height=610)
             
         self.show_frames(Ventas)   
@@ -55,7 +55,7 @@ class Container(tk.Frame):
         imagen_resize = image_pil.resize((35,30))
         image_tk = ImageTk.PhotoImage(imagen_resize)
         
-        self.btn_ventas = Button(frame2, fg="black",text="Ventas",font="sans 16 bold", command=self.ventas)
+        self.btn_ventas = Button(frame2, fg="black",text="Ventas",bg="#edf5ee",font="sans 16 bold", command=self.ventas)
         self.btn_ventas.config(image=image_tk,compound=LEFT,padx=20)
         self.btn_ventas.image = image_tk
         self.btn_ventas.place(x=0,y=0,width=184,height=40)
@@ -64,7 +64,7 @@ class Container(tk.Frame):
         imagen_resize = image_pil.resize((30,30))
         image_tk = ImageTk.PhotoImage(imagen_resize)
         
-        self.btn_inventario = Button(frame2, fg="black",text="Inventario",font="sans 16 bold", command=self.inventario)
+        self.btn_inventario = Button(frame2, fg="black",text="Inventario",bg="#edf5ee",font="sans 16 bold", command=self.inventario)
         self.btn_inventario.config(image=image_tk,compound=LEFT,padx=20)
         self.btn_inventario.image = image_tk
         self.btn_inventario.place(x=184,y=0,width=184,height=40)
@@ -73,7 +73,7 @@ class Container(tk.Frame):
         imagen_resize = image_pil.resize((30,30))
         image_tk = ImageTk.PhotoImage(imagen_resize)
         
-        self.btn_clientes = Button(frame2, fg="black",text="Clientes",font="sans 16 bold", command=self.clientes)
+        self.btn_clientes = Button(frame2, fg="black",text="Clientes",bg="#edf5ee",font="sans 16 bold", command=self.clientes)
         self.btn_clientes.config(image=image_tk,compound=LEFT,padx=20)
         self.btn_clientes.image = image_tk
         self.btn_clientes.place(x=369,y=0,width=184,height=40)
@@ -88,7 +88,7 @@ class Container(tk.Frame):
         imagen_resize = image_pil.resize((30,30))
         image_tk = ImageTk.PhotoImage(imagen_resize)
         
-        self.btn_informacion = Button(frame2, fg="black",text="Informacion",font="sans 16 bold", command=self.informacion)
+        self.btn_informacion = Button(frame2, fg="black",bg="#edf5ee",text="Informacion",font="sans 16 bold", command=self.informacion)
         self.btn_informacion.config(image=image_tk,compound=LEFT,padx=20)
         self.btn_informacion.image = image_tk
         self.btn_informacion.place(x=553,y=0,width=184,height=40)
