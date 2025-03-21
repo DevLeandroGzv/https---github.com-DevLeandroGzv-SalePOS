@@ -306,7 +306,7 @@ class Inventario(tk.Frame):
         top = tk.Toplevel(self)
         top.title("Editar articulo")
         top.geometry("700x400+200+50")
-        top.config(bg="#C6D9E3")
+        top.config(bg="#4f95c9")
         top.resizable(False,False)
         
         top.transient(self.master)

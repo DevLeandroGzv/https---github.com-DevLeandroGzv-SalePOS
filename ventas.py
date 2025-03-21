@@ -320,7 +320,7 @@ class Ventas(tk.Frame):
             ventana_ventas = tk.Toplevel(self)
             ventana_ventas.title("Ventas realizadas")
             ventana_ventas.geometry("1100x650+120+20")
-            ventana_ventas.configure(bg="#C6D9E3")
+            ventana_ventas.configure(bg="#4f95c9")
             ventana_ventas.resizable(False,False)
             ventana_ventas.transient(self.master)
             ventana_ventas.grab_set()
@@ -343,19 +343,19 @@ class Ventas(tk.Frame):
                     venta[5] = "{:,.0f}".format(venta[5])
                     venta[6] = datetime.datetime.strptime(venta[6],"%Y-%m-%d").strftime("%d-%m-%Y")
                     tree.insert("","end",values=venta)
-            label_ventas_realizadas = tk.Label(ventana_ventas,text="Ventas realizadas",font="sans 26 bold",bg="#C6D9E3")
+            label_ventas_realizadas = tk.Label(ventana_ventas,text="Ventas realizadas",font="sans 26 bold",bg="#4f95c9")
             label_ventas_realizadas.place(x=370,y=20)  
             
-            filtro_frame = tk.Frame(ventana_ventas,bg="#C6D9E3")
+            filtro_frame = tk.Frame(ventana_ventas,bg="#4f95c9")
             filtro_frame.place(x=20,y=60,width=1060,height=60)
             
-            label_factura = tk.Label(filtro_frame,text="Numero de Facturas :",font="sans 16 bold",bg="#C6D9E3")
+            label_factura = tk.Label(filtro_frame,text="Numero de Facturas :",font="sans 16 bold",bg="#4f95c9")
             label_factura.place(x=10,y=15)
             
             entry_factura =ttk.Entry(filtro_frame,font="sans 16 bold")
             entry_factura.place(x=240,y=10,width=200,height=40)
             
-            label_cliente = tk.Label(filtro_frame,text="Cliente :",font="sans 16 bold",bg="#C6D9E3")
+            label_cliente = tk.Label(filtro_frame,text="Cliente :",font="sans 16 bold",bg="#4f95c9")
             label_cliente.place(x=490,y=15)
             
             entry_cliente =ttk.Entry(filtro_frame,font="sans 16 bold")
